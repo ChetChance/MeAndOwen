@@ -1,0 +1,76 @@
+<html>
+<head>
+    <title>Game</title>
+    <style>
+        body{
+            margin: 0%;
+        }
+    </style>
+    <script>
+        function get(id){
+            return document.getElementById(id);
+        }
+
+        var playerX = 10;
+        var playerY = 10;
+        var velocity = [0,0];
+        var c = document.createElement("canvas");
+        c.width = window.innerWidth;
+        c.height = window.innerHeight;
+        c.style = "background-color: aqua;";
+        var ctx = c.getContext("2d");
+        //const dpi = window.devicePixelRatio;
+        //ctx.scale(dpi, dpi);
+
+        function doStart(){
+            document.body.appendChild(c);
+        } 
+
+        document.addEventListener("keydown", (event) => {
+            var name = event.key;
+            var code = event.code;
+            if (code === "ArrowRight" || code == "KeyD"){
+                velocity[0] = 5;
+            }
+            if (code === "ArrowLeft" || code == "KeyA"){
+                velocity[0] = -5;
+            }
+            if (code === "ArrowDown" || code == "KeyS"){
+                velocity[1] = 5;
+            }
+            if (code === "ArrowUp" || code == "KeyW"){
+                velocity[1] = -5;
+            }
+        }, false);
+        document.addEventListener("keyup", (event) => {
+            var name = event.key;
+            var code = event.code;
+            if (code === "ArrowRight" || code == "KeyD"){
+                velocity[0] = 0;
+            }
+            if (code === "ArrowLeft" || code == "KeyA"){
+                velocity[0] = 0;
+            }
+            if (code === "ArrowDown" || code == "KeyS"){
+                velocity[1] = 0;
+            }
+            if (code === "ArrowUp" || code == "KeyW"){
+                velocity[1] = 0;
+            }
+        }, false);
+
+        function draw(){
+            playerX += velocity[0];
+            playerY += velocity[1];
+            ctx.clearRect(0,0,c.width,c.height);
+            ctx.beginPath();
+            ctx.fillStyle = "black";
+            ctx.fillRect(playerX,playerY,10,10);
+            ctx.closePath();
+        }
+        setInterval(draw,10);
+    </script>
+</head>
+<body onload = "doStart()">
+</body>
+</html>
