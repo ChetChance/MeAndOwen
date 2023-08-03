@@ -60,14 +60,40 @@
         }, false);
 
         function draw(){
-            playerX += velocity[0];
-            playerY += velocity[1];
+            if (velocity[0] == 5){
+                if (collision(playerX, playerY, 10, 10, 800, 400, 10, 100) != 0){
+                    playerX += velocity[0];
+                }
+            }
+            if (velocity[0] == -5){
+                if (collision(playerX, playerY, 10, 10, 890, 400, 10, 100) != 0){
+                    playerX += velocity[0];
+                }
+            }
+            if (velocity[1] == 5){
+                if (collision(playerX, playerY, 10, 10, 800, 395, 100, 10) != 0){
+                    playerY += velocity[1];
+                }
+            }
+            if (velocity[1] == -5){
+                if (collision(playerX, playerY, 10, 10, 800, 495, 100, 10) != 0){
+                    playerY += velocity[1];
+                }
+            }
             ctx.clearRect(0,0,c.width,c.height);
             ctx.beginPath();
             ctx.fillStyle = "black";
             ctx.fillRect(playerX,playerY,10,10);
-            ctx.closePath();
+            ctx.fillStyle = "brown";
+            ctx.fillRect(800, 400, 100, 100);
         }
+
+        function collision(px,py,pw,ph,ox,oy,ow,oh){
+            if(px + pw >= ox && px <= ox + ow && py + ph > oy && py < oy + oh){
+                return 0
+            }
+        }
+
         setInterval(draw,10);
     </script>
 </head>
